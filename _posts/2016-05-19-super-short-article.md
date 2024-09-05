@@ -4,4 +4,132 @@ title: "Some articles are just so short that we have to make the footer stick"
 categories: misc
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+### 1. **Sintaxis Básica**
+
+Liquid se basa en una sintaxis sencilla y clara. Aquí están los componentes clave:
+
+- **Etiquetas**: Usadas para lógica y control de flujo.
+  ```liquid
+  {% if condition %}
+    ...content...
+  {% endif %}
+  ```
+
+- **Filtros**: Usados para modificar datos.
+  ```liquid
+  {{ text | upcase }}
+  ```
+
+- **Objetos y Variables**: Representan datos que puedes mostrar o manipular.
+  ```liquid
+  {{ site.title }}
+  ```
+
+### 2. **Etiquetas Comunes**
+
+- **Condicionales**:
+  ```liquid
+  {% if user.logged_in %}
+    Hello, {{ user.name }}!
+  {% else %}
+    Please log in.
+  {% endif %}
+  ```
+
+- **Bucles**:
+  ```liquid
+  {% for post in site.posts %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.excerpt }}</p>
+  {% endfor %}
+  ```
+
+- **Inclusiones**:
+  ```liquid
+  {% include header.html %}
+  ```
+
+- **Asignación de Variables**:
+  ```liquid
+  {% assign greeting = "Hello" %}
+  {{ greeting }}, world!
+  ```
+
+### 3. **Filtros Comunes**
+
+- **`upcase`**: Convierte a mayúsculas.
+  ```liquid
+  {{ "hello" | upcase }}  <!-- Outputs: HELLO -->
+  ```
+
+- **`downcase`**: Convierte a minúsculas.
+  ```liquid
+  {{ "HELLO" | downcase }}  <!-- Outputs: hello -->
+  ```
+
+- **`date`**: Formatea fechas.
+  ```liquid
+  {{ page.date | date: "%Y-%m-%d" }}  <!-- Outputs: 2024-09-05 -->
+  ```
+
+- **`replace`**: Reemplaza texto.
+  ```liquid
+  {{ "Hello, world!" | replace: "world", "Liquid" }}  <!-- Outputs: Hello, Liquid! -->
+  ```
+
+### 4. **Objetos y Variables**
+
+- **`site`**: Información del sitio, como `site.title`, `site.description`.
+- **`page`**: Información sobre la página actual, como `page.title`, `page.date`.
+
+### 5. **Comentarios**
+
+- Puedes agregar comentarios que no se muestran en la salida HTML:
+  ```liquid
+  {% comment %}
+    This is a comment.
+  {% endcomment %}
+  ```
+
+### Ejemplo Completo
+
+Aquí tienes un ejemplo de cómo podrías usar Liquid en un archivo de layout en Jekyll:
+
+```liquid
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ site.title }}</title>
+</head>
+<body>
+  <header>
+    <h1>{{ site.title }}</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      {% for page in site.pages %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+  
+  <main>
+    {{ content }}
+  </main>
+  
+  <footer>
+    <p>© {{ site.time | date: "%Y" }}</p>
+  </footer>
+</body>
+</html>
+```
+
+En este ejemplo:
+
+- Se usa `{{ site.title }}` para mostrar el título del sitio.
+- Se usa un bucle `{% for %}` para listar las páginas.
+- `{{ content }}` muestra el contenido de la página actual.
+- `{{ site.time | date: "%Y" }}` muestra el año actual.
