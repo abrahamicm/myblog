@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Esta publicación demuestra estilos de contenido de publicaciones"
-categories: basura
+categories: utilidades
 author:
 - Bart Simpson
 - Nelson Mandela Muntz
