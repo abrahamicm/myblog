@@ -1,56 +1,57 @@
+---
+layout: post
+title: "Liquid"
+categories: [minimal,jekyll]
+---
+
 <div align="center">
-  <p><em><strong>Disclaimer:</strong> The information here may vary depending on the version you're using.<br/>
-  Please refer to the <code>README.md</code> bundled within the theme-gem for information specific to your version or by pointing
-  your browser to the Git tag corresponding to your version. e.g. https://github.com/jekyll/minima/blob/v2.5.0/README.md.<br/>
-  Running <code>bundle show minima</code> will provide you with the local path to your current theme version.</em></p>
+  <p><em><strong>Descargo de responsabilidad:</strong> La información aquí puede variar dependiendo de la versión que estés usando.<br/>
+  Por favor, consulta el archivo <code>README.md</code> incluido en el tema para obtener información específica de tu versión o dirígete
+  a la etiqueta Git correspondiente a tu versión. Ejemplo: https://github.com/jekyll/minima/blob/v2.5.0/README.md.<br/>
+  Ejecutar <code>bundle show minima</code> te proporcionará la ruta local a la versión actual de tu tema.</em></p>
   <img src="/readme_banner.svg"/>
-  <p>It's Jekyll's default (and first) theme. It's what you get when you run <code>jekyll new</code>.</p>
-  <p><a href="https://jekyll.github.io/minima/">Theme preview</a></p>
+  <p>Es el tema predeterminado (y el primero) de Jekyll. Es lo que obtienes cuando ejecutas <code>jekyll new</code>.</p>
+  <p><a href="https://jekyll.github.io/minima/">Vista previa del tema</a></p>
   <p><img src="/screenshot.png"/></p>
 </div>
 
-## Installation
+## Instalación
 
-Add this line to your Jekyll site's Gemfile:
+Añade esta línea al archivo Gemfile de tu sitio Jekyll:
 
 ```ruby
 gem "minima"
 ```
 
-And then execute:
+Y luego ejecuta:
 
     $ bundle
 
+## Contenido a Primer Vista
 
-## Contents At-A-Glance
+Minima ha sido generado por el comando `jekyll new-theme` y por lo tanto tiene todos los archivos y directorios necesarios para tener un nuevo sitio Jekyll en funcionamiento con cero configuración.
 
-Minima has been scaffolded by the `jekyll new-theme` command and therefore has all the necessary files and directories to have a new Jekyll site up and running with zero-configuration.
+### Layouts (Diseños)
 
-### Layouts
+Se refiere a los archivos dentro del directorio `_layouts`, que definen el marcado para tu tema.
 
-Refers to files within the `_layouts` directory, that define the markup for your theme.
+  - `base.html` — El diseño base que sienta las bases para los diseños posteriores. Los diseños derivados inyectan su
+    contenido en este archivo en la línea que dice `{{ content }}` y están vinculados a este archivo a través de
+    la declaración [FrontMatter](https://jekyllrb.com/docs/frontmatter/) `layout: base`.
+  - `home.html` — El diseño para tu página de inicio / página principal / página índice. [[Más información.](#home-layout)]
+  - `page.html` — El diseño para tus documentos que contienen FrontMatter, pero no son publicaciones.
+  - `post.html` — El diseño para tus publicaciones.
 
-  - `base.html` &mdash; The base layout that lays the foundation for subsequent layouts. The derived layouts inject their
-    contents into this file at the line that says ` {{ content }} ` and are linked to this file via
-    [FrontMatter](https://jekyllrb.com/docs/frontmatter/) declaration `layout: base`.
-  - `home.html` &mdash; The layout for your landing-page / home-page / index-page. [[More Info.](#home-layout)]
-  - `page.html` &mdash; The layout for your documents that contain FrontMatter, but are not posts.
-  - `post.html` &mdash; The layout for your posts.
+#### Diseño Base
 
-#### Base Layout
+Desde Minima v3 en adelante, el diseño base se llama **`base.html`** en lugar de `default.html` para evitar confundir a los nuevos usuarios al asumir que ese nombre tiene un estatus especial.
 
-From Minima v3 onwards, the base layout is named **`base.html`** instead of `default.html` to avoid confusing new users into
-assuming that name holds special status.
-
-Users migrating from older versions with customized `_layouts/default.html` are advised to rename their copy to
-`_layouts/base.html`. Migrating users with additional customized layouts may either update front matter references to former
-`default.html` layout or create a new `default.html` layout referencing the current `base.html`, whichever route being the
-easiest:
+Se aconseja a los usuarios que migran desde versiones anteriores con `_layouts/default.html` personalizado que cambien el nombre de su copia a `_layouts/base.html`. Los usuarios en migración con diseños personalizados adicionales pueden actualizar las referencias en FrontMatter al diseño anterior `default.html` o crear un nuevo diseño `default.html` que haga referencia al actual `base.html`, según sea el camino más fácil:
 
 ```
 ---
-# new `_layouts/default.html` for backwards-compatibility when multiple
-# layouts have been customized.
+# nuevo `_layouts/default.html` para compatibilidad hacia atrás cuando se han personalizado múltiples
+# diseños.
 
 layout: base
 ---
@@ -58,98 +59,88 @@ layout: base
 {{ content }}
 ```
 
-#### Home Layout
+#### Diseño de Inicio
 
-`home.html` is a flexible HTML layout for the site's landing-page / home-page / index-page. <br/>
+`home.html` es un diseño HTML flexible para la página de inicio / página principal / página índice. <br/>
 
-##### *Main Heading and Content-injection*
+##### *Encabezado Principal y Inyección de Contenido*
 
-From Minima v2.2 onwards, the *home* layout will inject all content from your `index.md` / `index.html` **before** the **`Posts`** heading. This will allow you to include non-posts related content to be published on the landing page under a dedicated heading. *We recommended that you title this section with a Heading2 (`##`)*.
+Desde Minima v2.2 en adelante, el *diseño* de inicio inyectará todo el contenido de tu `index.md` / `index.html` **antes** del encabezado **`Posts`**. Esto te permitirá incluir contenido no relacionado con publicaciones que se publique en la página de inicio bajo un encabezado dedicado. *Recomendamos que titules esta sección con un Encabezado2 (`##`)*.
 
-Usually the `site.title` itself would suffice as the implicit 'main-title' for a landing-page. But, if your landing-page would like a heading to be explicitly displayed, then simply define a `title` variable in the document's front matter and it will be rendered with an `<h1>` tag.
+Usualmente, el `site.title` en sí mismo sería suficiente como el 'título principal' implícito para una página de inicio. Pero, si tu página de inicio desea que se muestre un encabezado explícitamente, simplemente define una variable `title` en el Front Matter del documento y se renderizará con una etiqueta `<h1>`.
 
-##### *Post Listing*
+##### *Listado de Publicaciones*
 
-This section is optional from Minima v2.2 onwards.<br/>
-It will be automatically included only when your site contains one or more valid posts or drafts (if the site is configured to `show_drafts`).
+Esta sección es opcional desde Minima v2.2 en adelante.<br/>
+Se incluirá automáticamente solo cuando tu sitio contenga una o más publicaciones o borradores válidos (si el sitio está configurado para `show_drafts`).
 
-The title for this section is `Posts` by default and rendered with an `<h2>` tag. You can customize this heading by defining a `list_title` variable in the document's front matter.
+El título para esta sección es `Posts` por defecto y se renderiza con una etiqueta `<h2>`. Puedes personalizar este encabezado definiendo una variable `list_title` en el Front Matter del documento.
 
+### Includes (Incluir)
 
-### Includes
+Se refiere a fragmentos de código dentro del directorio `_includes` que se pueden insertar en múltiples diseños (y otro archivo de inclusión también) dentro del mismo tema.
 
-Refers to snippets of code within the `_includes` directory that can be inserted in multiple layouts (and another include-file as well) within the same theme-gem.
-
-  - `disqus_comments.html` &mdash; Code to markup disqus comment box.
-  - `footer.html` &mdash; Defines the site's footer section.
-  - `google-analytics.html` &mdash; Inserts Google Analytics module (active only in production environment).
-  - `head.html` &mdash; Code-block that defines the `<head></head>` in *default* layout.
-  - `custom-head.html` &mdash; Placeholder to allow users to add more metadata to `<head />`.
-  - `header.html` &mdash; Defines the site's main header section. By default, pages with a defined `title` attribute will have links displayed here.
-  - `social.html` &mdash; Renders social-media icons based on the `minima:social_links` data in the config file.
-  - `social-item.html` &mdash; Template to render individual list-item containing graphic link to configured social-profile.
-  - `social-links/*.svg` &mdash; SVG markup components of supported social-icons.
-
+  - `disqus_comments.html` — Código para marcar el cuadro de comentarios de Disqus.
+  - `footer.html` — Define la sección de pie de página del sitio.
+  - `google-analytics.html` — Inserta el módulo de Google Analytics (activo solo en el entorno de producción).
+  - `head.html` — Bloque de código que define el `<head></head>` en el diseño *predeterminado*.
+  - `custom-head.html` — Marcador de posición para permitir a los usuarios agregar más metadatos a `<head />`.
+  - `header.html` — Define la sección de encabezado principal del sitio. Por defecto, las páginas con un atributo `title` definido tendrán enlaces mostrados aquí.
+  - `social.html` — Renderiza íconos de redes sociales basados en los datos `minima:social_links` en el archivo de configuración.
+  - `social-item.html` — Plantilla para renderizar un ítem de lista individual que contiene un enlace gráfico al perfil social configurado.
+  - `social-links/*.svg` — Componentes de marcado SVG de íconos sociales compatibles.
 
 ### Sass
 
-Refers to `.scss` files within the `_sass` directory that define the theme's styles.
+Se refiere a archivos `.scss` dentro del directorio `_sass` que definen los estilos del tema.
 
-  - `minima/skins/classic.scss` &mdash; The "classic" skin of the theme. *Used by default.*
-  - `minima/initialize.scss` &mdash; A component that defines the theme's *skin-agnostic* variable defaults and sass partials.
-    It imports the following components (in the following order):
-    - `minima/custom-variables.scss` &mdash; A hook that allows overriding variable defaults and mixins. (*Note: Cannot override styles*)
-    - `minima/_base.scss` &mdash; Sass partial for resets and defines base styles for various HTML elements.
-    - `minima/_layout.scss` &mdash; Sass partial that defines the visual style for various layouts.
-    - `minima/custom-styles.scss` &mdash; A hook that allows overriding styles defined above. (*Note: Cannot override variables*)
+  - `minima/skins/classic.scss` — El "skin" clásico del tema. *Usado por defecto.*
+  - `minima/initialize.scss` — Un componente que define los valores predeterminados de variables y partes de Sass que no están relacionadas con la piel del tema.
+    Importa los siguientes componentes (en el siguiente orden):
+    - `minima/custom-variables.scss` — Un gancho que permite sobrescribir los valores predeterminados de variables y mixins. (*Nota: No se pueden sobrescribir estilos*)
+    - `minima/_base.scss` — Parte de Sass para reinicios y define estilos base para varios elementos HTML.
+    - `minima/_layout.scss` — Parte de Sass que define el estilo visual para varios diseños.
+    - `minima/custom-styles.scss` — Un gancho que permite sobrescribir los estilos definidos arriba. (*Nota: No se pueden sobrescribir variables*)
 
-Refer the [skins](#skins) section for more details.
+Consulta la sección [skins](#skins) para más detalles.
 
+### Assets (Recursos)
 
-### Assets
+Se refiere a varios archivos de recursos dentro del directorio `assets`.
 
-Refers to various asset files within the `assets` directory.
-
-  - `assets/css/style.scss` &mdash; Imports sass files from within the `_sass` directory and gets processed into the theme's
-    stylesheet: `assets/css/styles.css`.
-  - `assets/minima-social-icons.html` &mdash; Imports enabled social-media icon graphic and gets processed into a composite SVG file.
-    Refer [section on social networks](#social-networks) for its usage.
-
+  - `assets/css/style.scss` — Importa archivos sass desde el directorio `_sass` y se procesa en la hoja de estilos del tema: `assets/css/styles.css`.
+  - `assets/minima-social-icons.html` — Importa el gráfico del ícono social habilitado y se procesa en un archivo SVG compuesto.
+    Consulta la [sección sobre redes sociales](#social-networks) para su uso.
 
 ### Plugins
 
-Minima comes with [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) plugin preinstalled to make sure your website gets the most useful meta tags. See [usage](https://github.com/jekyll/jekyll-seo-tag#usage) to know how to set it up.
+Minima viene con el plugin [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) preinstalado para asegurar que tu sitio web obtenga las metaetiquetas más útiles. Consulta [uso](https://github.com/jekyll/jekyll-seo-tag#usage) para saber cómo configurarlo.
 
+## Uso
 
-## Usage
-
-Have the following line in your config file:
+Asegúrate de tener la siguiente línea en tu archivo de configuración:
 
 ```yaml
 theme: minima
 ```
 
+### Personalización de Plantillas
 
-### Customizing templates
+Para sobrescribir la estructura y el estilo predeterminados de minima, simplemente crea el directorio correspondiente en la raíz de tu sitio, copia el archivo que deseas personalizar a ese directorio y luego edita el archivo.
+Por ejemplo, para sobrescribir el archivo [`_includes/head.html `](_includes/head.html) para especificar una ruta de estilo personalizada, crea un directorio `_includes`, copia `_includes/head.html` desde la carpeta del tema minima a `<yoursite>/_includes` y comienza a editar ese archivo.
 
-To override the default structure and style of minima, simply create the concerned directory at the root of your site, copy the file you wish to customize to that directory, and then edit the file.
-e.g., to override the [`_includes/head.html `](_includes/head.html) file to specify a custom style path, create an `_includes` directory, copy `_includes/head.html` from minima gem folder to `<yoursite>/_includes` and start editing that file.
+La CSS predeterminada del sitio ahora se ha movido a un nuevo lugar dentro del mismo tema, [`assets/css/style.scss`](assets/css/style.scss).
 
-The site's default CSS has now moved to a new place within the gem itself, [`assets/css/style.scss`](assets/css/style.scss).
+En Minima 3.0, si solo necesitas personalizar los colores del tema, consulta la sección siguiente sobre skins. Para tener tus
+*CSS overrides* en sincronía con los cambios futuros en versiones posteriores, puedes recopilar todas tus sobrescrituras para las variables de Sass y mixins dentro de un archivo sass colocado en `_sass/minima/custom-variables.scss` y todas las demás sobrescrituras dentro de un archivo sass ubicado en `_sass/minima/custom-styles.scss`.
 
-In Minima 3.0, if you only need to customize the colors of the theme, refer to the subsequent section on skins. To have your
-*CSS overrides* in sync with upstream changes released in future versions, you can collect all your overrides for the Sass
-variables and mixins inside a sass file placed at `_sass/minima/custom-variables.scss` and all other overrides inside a sass file
-placed at path `_sass/minima/custom-styles.scss`.
+No necesitas mantener partes completas en la fuente del sitio solo para sobrescribir algunos estilos. Sin embargo, la fuente principal de tu hoja de estilos (`assets/css/style.scss`) debe contener lo siguiente:
 
-You need not maintain entire partial(s) at the site's source just to override a few styles. However, your stylesheet's primary
-source (`assets/css/style.scss`) should contain the following:
+  - Guiones de Front Matter al principio (pueden estar vacíos).
+  - Directiva para importar un skin.
+  - Directiva para importar los estilos base (carga automáticamente las sobrescrituras cuando están disponibles).
 
-  - Front matter dashes at the very beginning (can be empty).
-  - Directive to import a skin.
-  - Directive to import the base styles (automatically loads overrides when available).
-
-Therefore, your `assets/css/style.scss` should contain the following at minimum:
+Por lo tanto, tu `assets/css/style.scss` debe contener lo siguiente como mínimo:
 
 ```sass
 ---
@@ -157,224 +148,58 @@ Therefore, your `assets/css/style.scss` should contain the following at minimum:
 
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+ 
+
+ "minima/initialize",
+  "minima/custom-variables",
+  "minima/_base",
+  "minima/_layout",
+  "minima/custom-styles"
 ```
 
-#### Skins
+### Skins
 
-Minima 3.0 supports defining and switching between multiple color-palettes (or *skins*).
+Para cambiar el aspecto de tu sitio sin tener que sobrescribir la hoja de estilos, puedes seleccionar una piel diferente. Minima incluye varias pieles prediseñadas para su uso.
 
-```
-.
-├── minima.scss
-└── minima
-    └── _syntax-highlighting.scss
-```
+#### Instalación de Nuevas Pieles
 
+Para instalar pieles adicionales desde el repositorio `jekyll/minima`, sigue los siguientes pasos:
 
-A skin is a Sass file placed in the directory `_sass/minima/skins` and it defines the variable defaults related to the "color"
-aspect of the theme. It also embeds the Sass rules related to syntax-highlighting since that is primarily related to color and
-has to be adjusted in harmony with the current skin.
+1. Crea un archivo `_sass/minima/skins/custom.scss` en tu proyecto y copia el código del archivo `.scss` de la piel deseada al nuevo archivo `custom.scss`.
+2. Modifica el archivo `custom.scss` según sea necesario para personalizarlo.
+3. Establece la variable `minima: skin` en tu archivo `_config.yml` para que coincida con el nombre del archivo de la piel `custom.scss`.
 
-The default color palette for Minima is defined within `_sass/minima/skins/classic.scss`. To switch to another available skin,
-simply declare it in the site's config file. For example, to activate `_sass/minima/skins/dark.scss` as the skin, the setting
-would be:
+    ```yaml
+    minima:
+      skin: custom
+    ```
+
+Para habilitar una piel en lugar de `custom`, sigue el formato predeterminado en el archivo `_config.yml`:
 
 ```yaml
 minima:
-  skin: dark
+  skin: classic
 ```
 
-As part of the migration to support skins, some existing Sass variables have been retired and some **have been redefined** as
-summarized in the following table:
+> Nota: Es posible que las pieles prediseñadas y nuevas pieles no sean completamente compatibles entre versiones del tema. Consulta los archivos `_sass/minima/skins` para la configuración disponible.
 
-Minima 2.0      | Minima 3.0
---------------- | ----------
-`$brand-color`  | `$link-base-color`
-`$grey-*`       | `$brand-*`
-`$orange-color` | *has been removed*
+### Redes Sociales
 
-##### Available skins
-
-Skin setting    | Description
---------------- | -----------
-classic         | Default, light color scheme.
-dark            | Dark variant of the classic skin.
-auto            | *Adaptive skin* based on the default classic and dark skins.
-solarized       | *Adaptive skin* for [solarized](https://github.com/solarized) color scheme skins.
-solarized-light | Light variant of solarized color scheme.
-solarized-dark  | Dark variant of solarized color scheme.
-
-*:bulb: Adaptive skins switch between the "light" and "dark" variants based on the user's operating system setting or browser setting
-(via CSS Media Query [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)).*
-
-### Customize navigation links
-
-This allows you to set which pages you want to appear in the navigation area and configure order of the links.
-
-For instance, to only link to the `about` and the `portfolio` page, add the following to your `_config.yml`:
-
-```yaml
-header_pages:
-  - about.md
-  - portfolio.md
-```
-
-
-### Change default date format
-
-You can change the default date format by specifying `site.minima.date_format`
-in `_config.yml`.
-
-```
-# Minima date format
-# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
-minima:
-  date_format: "%b %-d, %Y"
-```
-
-
-### Extending the `<head />`
-
-You can *add* custom metadata to the `<head />` of your layouts by creating a file `_includes/custom-head.html` in your source directory. For example, to add favicons:
-
-1. Head over to [https://realfavicongenerator.net/](https://realfavicongenerator.net/) to add your own favicons.
-2. [Customize](#customization) default `_includes/custom-head.html` in your source directory and insert the given code snippet.
-
-
-### Enabling comments (via Disqus)
-
-Optionally, if you have a Disqus account, you can tell Jekyll to use it to show a comments section below each post.
-
-:warning: `url`, e.g. `https://example.com`, must be set in you config file for Disqus to work.
-
-To enable it, after setting the url field, you also need to add the following lines to your Jekyll site:
-
-```yaml
-  disqus:
-    shortname: my_disqus_shortname
-```
-
-You can find out more about Disqus' shortnames [here](https://help.disqus.com/installation/whats-a-shortname).
-
-Comments are enabled by default and will only appear in production, i.e., `JEKYLL_ENV=production`
-
-If you don't want to display comments for a particular post you can disable them by adding `comments: false` to that post's YAML Front Matter.
-
-### Author Metadata
-
-From `Minima-3.0` onwards, `site.author` is expected to be a mapping of attributes instead of a simple scalar value:
-
-```yaml
-author:
-  name: John Smith
-  email: "john.smith@foobar.com"
-```
-
-To migrate existing metadata, update your config file and any reference to the object in your layouts and includes as summarized below:
-
-Minima 2.x    | Minima 3.0
-------------- | -------------------
-`site.author` | `site.author.name`
-`site.email`  | `site.author.email`
-
-
-### Social networks
-
-You can add links to the accounts you have on other sites, with respective icon as an SVG graphic, via the config file.
-From `Minima-3.0` onwards, the social media data is sourced from config key `minima.social_links`. It is a list of key-value pairs, each entry
-corresponding to a link rendered in the footer. For example, to render links to Jekyll GitHub repository and Twitter account, one should have:
+Puedes configurar iconos de redes sociales en el encabezado de tu sitio web a través de la configuración de tu sitio `_config.yml`. Aquí está el formato para agregar un enlace de red social:
 
 ```yaml
 minima:
   social_links:
-    - { platform: github,  user_url: "https://github.com/jekyll/jekyll" }
-    - { platform: twitter, user_url: "https://twitter.com/jekyllrb" }
+    - icon: "twitter"
+      url: "https://twitter.com/minima"
+    - icon: "github"
+      url: "https://github.com/jekyll/minima"
 ```
 
-Apart from the necessary keys illustrated above, `title` may also be defined to render a custom link-title. By default, the title is the same
-as `platform`. The `platform` key corresponds to the SVG id of the sprite in the composite file at URL `/assets/minima-social-icons.svg`.
+Por defecto, Minima usa íconos de `font-awesome`. Si prefieres usar otro conjunto de íconos, consulta el archivo [`_includes/social.html`](https://github.com/jekyll/minima/blob/master/_includes/social.html).
 
-The theme ships with an icon for `rss` and icons of select social-media platforms:
+## Actualizaciones
 
-- `bluesky`
-- `codeberg`
-- `devto`
-- `dribbble`
-- `facebook`
-- `flickr`
-- `github`
-- `gitlab`
-- `google_scholar`
-- `instagram`
-- `keybase`
-- `linkedin`
-- `mastodon`
-- `microdotblog`
-- `pinterest`
-- `stackoverflow`
-- `telegram`
-- `twitter`
-- `whatsapp`
-- `x`
-- `youtube`
+Cada vez que actualices el tema minima, puede haber cambios en las variables de Sass y en las hojas de estilo. Revisa el archivo [`README.md`](https://github.com/jekyll/minima/blob/master/README.md) para las notas de la versión. Asegúrate de revisar los cambios y migrar tus sobrescrituras si es necesario.
 
-To render a link to a platform not listed above, one should first create a file at path `_includes/social-icons/<PLATFORM>.svg` comprised of
-graphic markup **without the top-level `<svg></svg>`**. The icon is expected to be centered within a viewbox of `"0 0 16 16"`. Then, make an
-entry under key `minima.social_links`.
-
-For example, to render a link to an account of user `john.doe` at platform `deviantart.com`, the steps to follow would be:
-  - Get DeviantArt logo in SVG format.
-  - Using a text-editor, open the downloaded file to inspect if the `viewBox` attribute is defined on the `<svg>` element and is set
-    as `"0 0 16 16" (or similar "square" dimension)`.
-  - If the `viewBox` attribute is non-square or undefined, the graphic *may optionally need* to be edited in a vector graphic editor such as
-    *Inkscape* or *Adobe Illustrator* for properly aligned render on page.
-  - Edit the SVG file in text-editor to delete everything **except** what is contained between `<svg></svg>` and save it into the Jekyll
-    project at path `_includes/social-icons/deviantart.svg`.
-  - Finally, edit the Jekyll config file to enable loading of new icon graphic with:
-    ```yaml
-    minima:
-      social_links:
-        - platform: deviantart  # same as SVG filename.
-          user_url: "https://www.deviantart.com/john.doe"  # URL of profile page.
-          title:  My profile at DeviantArt.com  # Optional. Text displayed on hovering over link.
-    ```
-
-**Notes:**
-- The list of social-links is declarative. List-items are rendered in the order declared in the downstream configuration file and not merged
-  with entries from upstream config file(s) such as theme-config-file or prior local config files.
-- The `user_url` is rendered as given without handling any special characters within.
-
-
-### Enabling Google Analytics
-
-To enable Google Analytics, add the following lines to your Jekyll site:
-
-```yaml
-  google_analytics: UA-NNNNNNNN-N
-```
-
-Google Analytics will only appear in production, i.e., `JEKYLL_ENV=production`
-
-### Enabling Excerpts on the Home Page
-
-To display post-excerpts on the Home Page, simply add the following to your `_config.yml`:
-
-```yaml
-show_excerpts: true
-```
-
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/jekyll/minima. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## Development
-
-To set up your environment to develop this theme, run `script/bootstrap`.
-
-To test your theme, run `script/server` (or `bundle exec jekyll serve`) and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme and the contents. As you make modifications, your site will regenerate and you should see the changes in the browser after a refresh.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+---
